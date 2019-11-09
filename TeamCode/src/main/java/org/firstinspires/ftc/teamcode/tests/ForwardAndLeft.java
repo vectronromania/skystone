@@ -1,17 +1,25 @@
-package org.firstinspires.ftc.teamcode.systems;
+package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class Autodrivetrain {
+import org.firstinspires.ftc.teamcode.systems.Autodrivetrain;
+import org.firstinspires.ftc.teamcode.systems.Drivetrain;
 
-    public final double diameter = 10.0;
+@Autonomous(name = "Forward and left parking", group = "Autonomous")
+public class ForwardAndLeft extends LinearOpMode {
+
+    public Drivetrain drivetrain = new Drivetrain();
+    public ElapsedTime runtime = new ElapsedTime();
+
+    public final double diameter = 10.16;
     public final double wheelCircumference = diameter * Math.PI;
     public final double ticksPerRotation = 1120.0;
     public final double gearRatio = 1.77 / 1.0;
     public final double scaleFactor = 1.0;
     public final double ticksPerCentimeter = (ticksPerRotation * scaleFactor) / (gearRatio * wheelCircumference);
-
-    public Drivetrain drivetrain = new Drivetrain();
 
     public void runToPosition() {
         drivetrain.rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -21,11 +29,10 @@ public class Autodrivetrain {
     }
 
     public boolean motorsBusy() {
-        if (drivetrain.rightFront.isBusy() && drivetrain.rightBack.isBusy() && drivetrain.leftBack.isBusy() && drivetrain.leftFront.isBusy()) {
+        if (drivetrain.rightFront.isBusy() && drivetrain.rightBack.isBusy() && drivetrain.leftBack.isBusy() && drivetrain.leftFront.isBusy())
             return true;
-        } else {
+        else
             return false;
-        }
     }
 
     public void move(double centimeters, double power) {
@@ -41,7 +48,11 @@ public class Autodrivetrain {
         drivetrain.setIdenticalPowers(power);
 
         while (motorsBusy()) {
-
+            telemetry.addData("RF", drivetrain.rightFront.getCurrentPosition());
+            telemetry.addData("RB", drivetrain.rightBack.getCurrentPosition());
+            telemetry.addData("LB", drivetrain.leftBack.getCurrentPosition());
+            telemetry.addData("LF", drivetrain.leftFront.getCurrentPosition());
+            telemetry.update();
         }
 
         drivetrain.setIdenticalPowers(0.0);
@@ -68,5 +79,27 @@ public class Autodrivetrain {
         drivetrain.setIdenticalPowers(0.0);
 
         return;
+    }
+
+    @Override
+    public void runOpMode() {
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+
+        drivetrain.getHardwareMap(hardwareMap);
+        drivetrain.setDirections();
+
+        waitForStart();
+        runtime.reset();
+
+        move(13, 0.5);
+        strafe(-100, 0.5);
+
+        while (opModeIsActive()) {
+
+        }
+
+        telemetry.addData("Status", "Done");
+        telemetry.update();
     }
 }

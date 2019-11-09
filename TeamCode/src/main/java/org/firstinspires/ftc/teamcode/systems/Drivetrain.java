@@ -12,6 +12,8 @@ public class Drivetrain {
     public DcMotor leftBack;
     public DcMotor leftFront;
 
+    public Double speed = 1.0;
+
     public void getHardwareMap(HardwareMap hardwareMap) {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
@@ -41,26 +43,24 @@ public class Drivetrain {
     }
 
     public void drive(Gamepad gamepad) {
-        double powerMultiplier = 1.0;
-
-        if (gamepad.a == true) powerMultiplier = 0.25;
-        if (gamepad.b == true) powerMultiplier = 0.5;
-        if (gamepad.y == true) powerMultiplier = 0.75;
-        if (gamepad.x == true) powerMultiplier = 1.0;
+        if (gamepad.a == true) speed = 0.4;
+        if (gamepad.b == true) speed = 0.6;
+        if (gamepad.y == true) speed = 0.8;
+        if (gamepad.x == true) speed = 1.0;
 
         if (gamepad.left_stick_x != 0 || gamepad.left_stick_y != 0) {
-            double x = gamepad.left_stick_x * powerMultiplier;
-            double y = -gamepad.left_stick_y * powerMultiplier;
+            Double x = gamepad.left_stick_x * speed;
+            Double y = -gamepad.left_stick_y * speed;
             setDifferentPowers(
-                    - x - y,
                     + x - y,
+                    - x - y,
                     - x + y,
                     + x + y
             );
         }
 
         if (gamepad.right_stick_x != 0) {
-            setIdenticalPowers(powerMultiplier * -gamepad.right_stick_x);
+            setIdenticalPowers(speed * gamepad.right_stick_x);
         }
 
         setIdenticalPowers(0.0);
