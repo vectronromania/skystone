@@ -7,7 +7,7 @@ public class Autodrivetrain {
     public final double diameter = 10.0;
     public final double wheelCircumference = diameter * Math.PI;
     public final double ticksPerRotation = 1120.0;
-    public final double gearRatio = 1.77 / 1.0;
+    public final double gearRatio = 1.0 / 1.0;
     public final double scaleFactor = 1.0;
     public final double ticksPerCentimeter = (ticksPerRotation * scaleFactor) / (gearRatio * wheelCircumference);
 
@@ -55,6 +55,27 @@ public class Autodrivetrain {
         drivetrain.rightFront.setTargetPosition((int) (drivetrain.rightFront.getCurrentPosition() + ticks));
         drivetrain.rightBack.setTargetPosition((int) (drivetrain.rightBack.getCurrentPosition() - ticks));
         drivetrain.leftBack.setTargetPosition((int) (drivetrain.leftBack.getCurrentPosition() - ticks));
+        drivetrain.leftFront.setTargetPosition((int) (drivetrain.leftFront.getCurrentPosition() + ticks));
+
+        runToPosition();
+
+        drivetrain.setIdenticalPowers(power);
+
+        while (motorsBusy()) {
+
+        }
+
+        drivetrain.setIdenticalPowers(0.0);
+
+        return;
+    }
+
+    public void rotate(double centimeters, double power) {
+        double ticks = centimeters * ticksPerCentimeter;
+
+        drivetrain.rightFront.setTargetPosition((int) (drivetrain.rightFront.getCurrentPosition() + ticks));
+        drivetrain.rightBack.setTargetPosition((int) (drivetrain.rightBack.getCurrentPosition() + ticks));
+        drivetrain.leftBack.setTargetPosition((int) (drivetrain.leftBack.getCurrentPosition() + ticks));
         drivetrain.leftFront.setTargetPosition((int) (drivetrain.leftFront.getCurrentPosition() + ticks));
 
         runToPosition();

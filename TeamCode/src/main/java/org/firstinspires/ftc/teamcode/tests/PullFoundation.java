@@ -9,8 +9,6 @@ import org.firstinspires.ftc.teamcode.systems.Autodrivetrain;
 import org.firstinspires.ftc.teamcode.systems.Drivetrain;
 import org.firstinspires.ftc.teamcode.systems.Foundation;
 
-import javax.lang.model.element.Name;
-
 @Autonomous(name = "Pull foundation", group = "Autonomous")
 public class PullFoundation extends LinearOpMode {
 
@@ -35,13 +33,13 @@ public class PullFoundation extends LinearOpMode {
     }
 
     public void up() {
-        foundation.foundationServo1.setPosition(0);
-        foundation.foundationServo2.setPosition(0);
+        foundation.foundationServo1.setPosition(0.0);
+        foundation.foundationServo2.setPosition(0.75);
     }
 
     public void down() {
-        foundation.foundationServo1.setPosition(1);
-        foundation.foundationServo2.setPosition(1);
+        foundation.foundationServo1.setPosition(0.75);
+        foundation.foundationServo2.setPosition(0.0);
     }
 
     public void move(double centimeters, double power) {
@@ -100,11 +98,21 @@ public class PullFoundation extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        move(75, 0.5);
-        strafe(43, 0.5);
+        move(70, 0.5);
+        strafe(63, 0.5);
+        sleep(500);
         down();
-        move(-75, 0.5);
+        sleep(500);
+        while (foundation.foundationServo1.getPosition() != 0.75 && foundation.foundationServo2.getPosition() != 0.0) {
+            down();
+        }
+        move(-80, 0.5);
+        sleep(500);
         up();
+        sleep(500);
+        while (foundation.foundationServo1.getPosition() != 0.0 && foundation.foundationServo2.getPosition() != 0.75) {
+            up();
+        }
         strafe(-135, 0.5);
 
         while (opModeIsActive()) {

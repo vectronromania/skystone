@@ -21,11 +21,11 @@ public class Foundation {
 
     public void move(Gamepad gamepad) {
         if (gamepad.right_bumper) {
-            foundationServo1.setPosition(0);
+            foundationServo1.setPosition(0.75);
             foundationServo2.setPosition(0);
         } else if (gamepad.left_bumper) {
-            foundationServo1.setPosition(1);
-            foundationServo2.setPosition(1);
+            foundationServo1.setPosition(0);
+            foundationServo2.setPosition(0.75);
         }
     }
 }
