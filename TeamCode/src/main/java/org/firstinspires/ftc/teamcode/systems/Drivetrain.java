@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Drivetrain {
 
-    public DcMotor rightFront;
-    public DcMotor rightBack;
-    public DcMotor leftBack;
-    public DcMotor leftFront;
+    public static DcMotor rightFront;
+    public static DcMotor rightBack;
+    public static DcMotor leftBack;
+    public static DcMotor leftFront;
 
-    public Double speed = 1.0;
+    public double speed = 1.0;
 
     public void getHardwareMap(HardwareMap hardwareMap) {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
@@ -28,14 +28,14 @@ public class Drivetrain {
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
-    public void setIdenticalPowers(double p) {
+    public static void setIdenticalPowers(double p) {
         rightFront.setPower(p);
         rightBack.setPower(p);
         leftBack.setPower(p);
         leftFront.setPower(p);
     }
 
-    public void setDifferentPowers(double a, double b, double c, double d) {
+    public static void setDifferentPowers(double a, double b, double c, double d) {
         rightFront.setPower(a);
         rightBack.setPower(b);
         leftBack.setPower(c);
@@ -64,5 +64,93 @@ public class Drivetrain {
         }
 
         setIdenticalPowers(0.0);
+    }
+
+    public static class Autodrivetrain {
+
+        public final double diameter = 10.0;
+        public final double wheelCircumference = diameter * Math.PI;
+        public final double ticksPerRotation = 1120.0;
+        public final double gearRatio = 1.0 / 1.0;
+        public final double scaleFactor = 1.0;
+        public final double ticksPerCentimeter = (ticksPerRotation * scaleFactor) / (gearRatio * wheelCircumference);
+
+        public void runToPosition() {
+            rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+
+        public boolean motorsBusy() {
+            if (rightFront.isBusy() && rightBack.isBusy() && leftBack.isBusy() && leftFront.isBusy()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public void move ( double centimeters, double power){
+            double ticks = centimeters * ticksPerCentimeter;
+
+            rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() - ticks));
+            rightBack.setTargetPosition((int) (rightBack.getCurrentPosition() - ticks));
+            leftBack.setTargetPosition((int) (leftBack.getCurrentPosition() + ticks));
+            leftFront.setTargetPosition((int) (leftFront.getCurrentPosition() + ticks));
+
+            runToPosition();
+
+            setIdenticalPowers(power);
+
+            while (motorsBusy()) {
+
+            }
+
+            setIdenticalPowers(0.0);
+
+            return;
+        }
+
+        public void strafe ( double centimeters, double power){
+            double ticks = centimeters * ticksPerCentimeter;
+
+            rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() + ticks));
+            rightBack.setTargetPosition((int) (rightBack.getCurrentPosition() - ticks));
+            leftBack.setTargetPosition((int) (leftBack.getCurrentPosition() - ticks));
+            leftFront.setTargetPosition((int) (leftFront.getCurrentPosition() + ticks));
+
+            runToPosition();
+
+            setIdenticalPowers(power);
+
+            while (motorsBusy()) {
+
+            }
+
+            setIdenticalPowers(0.0);
+
+            return;
+        }
+
+        public void rotate ( double centimeters, double power) {
+            double ticks = centimeters * ticksPerCentimeter;
+
+            rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() + ticks));
+            rightBack.setTargetPosition((int) (rightBack.getCurrentPosition() + ticks));
+            leftBack.setTargetPosition((int) (leftBack.getCurrentPosition() + ticks));
+            leftFront.setTargetPosition((int) (leftFront.getCurrentPosition() + ticks));
+
+            runToPosition();
+
+            setIdenticalPowers(power);
+
+            while (motorsBusy()) {
+
+            }
+
+            setIdenticalPowers(0.0);
+
+            return;
+        }
     }
 }

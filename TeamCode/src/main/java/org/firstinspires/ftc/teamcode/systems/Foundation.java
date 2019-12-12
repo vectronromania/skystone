@@ -19,6 +19,16 @@ public class Foundation {
         foundationServo2.setDirection(Servo.Direction.FORWARD);
     }
 
+    public void up() {
+        foundationServo1.setPosition(0);
+        foundationServo2.setPosition(1);
+    }
+
+    public void down() {
+        foundationServo1.setPosition(1);
+        foundationServo2.setPosition(0);
+    }
+
     public void move(Gamepad gamepad) {
         if (gamepad.right_bumper) {
             foundationServo1.setPosition(0);

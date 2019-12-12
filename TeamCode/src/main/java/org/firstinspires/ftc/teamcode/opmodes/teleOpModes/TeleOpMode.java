@@ -2,37 +2,30 @@ package org.firstinspires.ftc.teamcode.opmodes.teleOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
-import org.firstinspires.ftc.teamcode.systems.Autodrivetrain;
-import org.firstinspires.ftc.teamcode.systems.Drivetrain;
-import org.firstinspires.ftc.teamcode.systems.Foundation;
 
 @TeleOp(name = "TeleOpMode", group = "TeleOp")
 public class TeleOpMode extends LinearOpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
-    public Drivetrain drivetrain = new Drivetrain();
-    public Foundation foundation = new Foundation();
+    public Robot robot = new Robot();
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        drivetrain.getHardwareMap(hardwareMap);
-        drivetrain.setDirections();
-
-        foundation.getHardwareMap(hardwareMap);
-        foundation.setDirections();
+        robot.initialize(hardwareMap);
 
         waitForStart();
         runtime.reset();
 
         while (opModeIsActive()) {
-
+            robot.drivetrain.drive(gamepad1);
+//            robot.foundation.move(gamepad1);
+//            robot.intake.move(gamepad2);
         }
 
         telemetry.addData("Status", "Done");

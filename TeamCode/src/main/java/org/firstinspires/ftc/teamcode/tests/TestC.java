@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.teleOpModes;
+package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,12 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="Test", group="TeleOp")
-public class Test extends LinearOpMode {
+@TeleOp(name="TestC", group="TeleOp")
+public class TestC extends LinearOpMode {
+
     public DcMotor rightFront;
     public DcMotor rightBack;
     public DcMotor leftBack;
     public DcMotor leftFront;
+
+    public ElapsedTime runtime = new ElapsedTime();
 
     public void getHardwareMap(HardwareMap hw) {
         rightFront = hw.get(DcMotor.class, "rightFront");
@@ -19,8 +22,6 @@ public class Test extends LinearOpMode {
         leftBack = hw.get(DcMotor.class, "leftBack");
         leftFront = hw.get(DcMotor.class, "leftFront");
     }
-
-    public ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
