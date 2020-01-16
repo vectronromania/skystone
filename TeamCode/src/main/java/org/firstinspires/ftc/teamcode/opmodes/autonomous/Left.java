@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Autonomous(name = "Left", group = "Autonomous")
+@Autonomous(name = "Left", group = "Parking")
 public class Left extends LinearOpMode {
 
     public Robot robot = new Robot();

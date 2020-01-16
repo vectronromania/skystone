@@ -35,7 +35,7 @@ public class Drivetrain {
         leftFront.setPower(p);
     }
 
-    public static void setDifferentPowers(double a, double b, double c, double d) {
+    public void setDifferentPowers(double a, double b, double c, double d) {
         rightFront.setPower(a);
         rightBack.setPower(b);
         leftBack.setPower(c);
@@ -71,7 +71,7 @@ public class Drivetrain {
         public final double diameter = 10.0;
         public final double wheelCircumference = diameter * Math.PI;
         public final double ticksPerRotation = 1120.0;
-        public final double gearRatio = 1.0 / 1.0;
+        public final double gearRatio = 1.5 / 1.0;
         public final double scaleFactor = 1.0;
         public final double ticksPerCentimeter = (ticksPerRotation * scaleFactor) / (gearRatio * wheelCircumference);
 
@@ -90,7 +90,14 @@ public class Drivetrain {
             }
         }
 
-        public void move ( double centimeters, double power){
+        public void stop(){
+            rightFront.setPower(0);
+            rightBack.setPower(0);
+            leftFront.setPower(0);
+            leftBack.setPower(0);
+        }
+
+        public void move(double centimeters, double power){
             double ticks = centimeters * ticksPerCentimeter;
 
             rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() - ticks));
@@ -106,12 +113,13 @@ public class Drivetrain {
 
             }
 
-            setIdenticalPowers(0.0);
+//            setIdenticalPowers(0);
+            stop();
 
             return;
         }
 
-        public void strafe ( double centimeters, double power){
+        public void strafe(double centimeters, double power) {
             double ticks = centimeters * ticksPerCentimeter;
 
             rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() + ticks));
@@ -127,12 +135,13 @@ public class Drivetrain {
 
             }
 
-            setIdenticalPowers(0.0);
+//            setIdenticalPowers(0);
+            stop();
 
             return;
         }
 
-        public void rotate ( double centimeters, double power) {
+        public void rotate(double centimeters, double power) {
             double ticks = centimeters * ticksPerCentimeter;
 
             rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() + ticks));
@@ -148,7 +157,8 @@ public class Drivetrain {
 
             }
 
-            setIdenticalPowers(0.0);
+//            setIdenticalPowers(0);
+            stop();
 
             return;
         }

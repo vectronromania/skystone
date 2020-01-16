@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.hardware.Robot;
 @TeleOp(name = "TeleOpMode", group = "TeleOp")
 public class TeleOpMode extends LinearOpMode {
 
-    public ElapsedTime runtime = new ElapsedTime();
     public Robot robot = new Robot();
+    public ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
@@ -24,8 +24,10 @@ public class TeleOpMode extends LinearOpMode {
 
         while (opModeIsActive()) {
             robot.drivetrain.drive(gamepad1);
-//            robot.foundation.move(gamepad1);
-//            robot.intake.move(gamepad2);
+//            robot.foundation.drive(gamepad1);
+            robot.intake.drive(gamepad2);
+            robot.lift.drive(gamepad2);
+            robot.outtake.drive(gamepad2);
         }
 
         telemetry.addData("Status", "Done");

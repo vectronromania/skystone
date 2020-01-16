@@ -20,13 +20,28 @@ public class Intake {
         intakeMotor2.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
-    public void move(Gamepad gamepad) {
+    public void in() {
+        intakeMotor1.setPower(1);
+        intakeMotor2.setPower(0.5);
+    }
+
+    public void out() {
+        intakeMotor1.setPower(-1);
+        intakeMotor2.setPower(-0.5);
+    }
+
+    public void stop() {
+        intakeMotor1.setPower(0);
+        intakeMotor2.setPower(0);
+    }
+
+    public void drive(Gamepad gamepad) {
         if (gamepad.right_trigger == 1) {
-            intakeMotor1.setPower(0.5);
-            intakeMotor2.setPower(-0.5);
+            in();
         } else if (gamepad.left_trigger == 1) {
-            intakeMotor1.setPower(-0.5);
-            intakeMotor2.setPower(0.5);
+            out();
+        } else {
+            stop();
         }
     }
 }

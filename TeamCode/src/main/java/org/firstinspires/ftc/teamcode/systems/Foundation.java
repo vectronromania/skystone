@@ -6,36 +6,29 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Foundation {
 
-    public Servo foundationServo1;
-    public Servo foundationServo2;
+    public Servo foundationServo;
 
     public void getHardwareMap(HardwareMap hardwareMap) {
-        foundationServo1 = hardwareMap.get(Servo.class, "foundationServo1");
-        foundationServo2 = hardwareMap.get(Servo.class, "foundationServo2");
+        foundationServo = hardwareMap.get(Servo.class, "foundationServo");
     }
 
-    public void setDirections() {
-        foundationServo1.setDirection(Servo.Direction.FORWARD);
-        foundationServo2.setDirection(Servo.Direction.FORWARD);
+    public void setDirection() {
+        foundationServo.setDirection(Servo.Direction.FORWARD);
     }
 
     public void up() {
-        foundationServo1.setPosition(0);
-        foundationServo2.setPosition(1);
+        foundationServo.setPosition(0);
     }
 
     public void down() {
-        foundationServo1.setPosition(1);
-        foundationServo2.setPosition(0);
+        foundationServo.setPosition(1);
     }
 
-    public void move(Gamepad gamepad) {
+    public void drive(Gamepad gamepad) {
         if (gamepad.right_bumper) {
-            foundationServo1.setPosition(0.75);
-            foundationServo2.setPosition(0);
+            down();
         } else if (gamepad.left_bumper) {
-            foundationServo1.setPosition(0);
-            foundationServo2.setPosition(0.75);
+            up();
         }
     }
 }
