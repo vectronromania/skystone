@@ -23,7 +23,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
-@Autonomous(name ="Skystone removal", group = "Tests")
+@Autonomous(name ="Skystone removal (red left)", group = "Tests")
 public class SkystoneRemoval extends LinearOpMode {
 
     boolean firstTime = true;
@@ -53,69 +53,50 @@ public class SkystoneRemoval extends LinearOpMode {
     private boolean targetVisible = false;
     private float phoneXRotate = 0;
     private float phoneYRotate = 0;
-    private final float phoneZRotate = 45;
+    private final float phoneZRotate = 0;
 
     public Robot robot = new Robot();
     public ElapsedTime runtime = new ElapsedTime();
 
-    public void case1() {
+    public void right() {
         robot.autodrivetrain.strafe(60, 0.5);
-        robot.autodrivetrain.stop();
         robot.autodrivetrain.move(80, 0.5);
-        robot.autodrivetrain.stop();
         robot.autodrivetrain.move(-30, 0.5);
-        robot.autodrivetrain.stop();
         robot.autodrivetrain.rotate(-50, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.in();
-        robot.autodrivetrain.move(20, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.stop();
-        robot.autodrivetrain.strafe(-50, 0.5);
-        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(-200, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.out();
-    }
-
-    public void case2() {
-        robot.autodrivetrain.strafe(40, 0.5);
-        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(80, 0.5);
-        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(-30, 0.5);
-        robot.autodrivetrain.stop();
-        robot.autodrivetrain.rotate(-50, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.in();
-        robot.autodrivetrain.move(20, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.stop();
-        robot.autodrivetrain.strafe(-50, 0.5);
-        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(-200, 0.5);
-        robot.autodrivetrain.stop();
-        robot.intake.out();
-
-    }
-
-    public void case3() {
-        robot.autodrivetrain.strafe(20, 0.5);
-//        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(80, 0.5);
-//        robot.autodrivetrain.stop();
-        robot.autodrivetrain.move(-30, 0.5);
-//        robot.autodrivetrain.stop();
-        robot.autodrivetrain.rotate(-50, 0.5);
-//        robot.autodrivetrain.stop();
         robot.intake.in();
         robot.autodrivetrain.move(30, 0.5);
-//        robot.autodrivetrain.stop();
         robot.intake.stop();
         robot.autodrivetrain.strafe(-50, 0.5);
-//        robot.autodrivetrain.stop();
         robot.autodrivetrain.move(-200, 0.5);
-//        robot.autodrivetrain.stop();
+        robot.intake.out();
+    }
+
+    public void middle() {
+        robot.autodrivetrain.strafe(40, 0.5);
+        robot.autodrivetrain.move(80, 0.5);
+        robot.autodrivetrain.move(-30, 0.5);
+        robot.autodrivetrain.rotate(-50, 0.5);
+        robot.intake.in();
+        robot.autodrivetrain.move(30, 0.5);
+        robot.intake.stop();
+        robot.autodrivetrain.strafe(-50, 0.5);
+        robot.autodrivetrain.move(-200, 0.5);
+        robot.intake.out();
+
+    }
+
+    public void left() {
+        robot.autodrivetrain.strafe(20, 0.5);
+        robot.autodrivetrain.move(80, 0.5);
+        robot.autodrivetrain.move(-25, 0.5);
+        robot.autodrivetrain.rotate(-53, 0.5);
+        robot.intake.in();
+        robot.autodrivetrain.move(30, 0.5);
+        robot.intake.stop();
+        robot.autodrivetrain.rotate(-53, 0.5);
+        robot.autodrivetrain.move(80, 0.5);
+        robot.autodrivetrain.rotate(-53, 0.5);
+        robot.autodrivetrain.move(200, 0.5);
         robot.intake.out();
     }
 
@@ -243,7 +224,7 @@ public class SkystoneRemoval extends LinearOpMode {
 
         robot.initialize(hardwareMap);
 
-        robot.autodrivetrain.move(40, 0.5);
+        robot.autodrivetrain.move(30, 0.5);
 
         targetsSkyStone.activate();
         while (!isStopRequested()) {
@@ -271,7 +252,7 @@ public class SkystoneRemoval extends LinearOpMode {
                 Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
                 telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
 
-                case3();
+                left();
             }
             else {
                 telemetry.addData("Visible Target", "none");
@@ -283,9 +264,9 @@ public class SkystoneRemoval extends LinearOpMode {
             }
         }
 
+        sleep(3000);
         robot.intake.stop();
-        robot.autodrivetrain.strafe(40, 0.5);
-        robot.autodrivetrain.move(80, 0.5);
+        robot.autodrivetrain.move(-45, 0.5);
 
         while (opModeIsActive()) {
 

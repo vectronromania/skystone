@@ -22,8 +22,9 @@ public class ForwardAndRight extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        robot.autodrivetrain.move(60, 0.5);
-        robot.autodrivetrain.strafe(100, 0.5);
+        robot.autodrivetrain.move(55, 0.5);
+        robot.autodrivetrain.rotate(50, 0.5);
+        robot.autodrivetrain.move(85, 0.5);
 
         while (opModeIsActive()) {
 
