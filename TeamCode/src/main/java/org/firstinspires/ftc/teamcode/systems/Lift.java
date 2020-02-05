@@ -5,10 +5,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
 public class Lift {
 
     public static DcMotor liftMotor;
-    public double speed = 1.0;
 
     public final double diameter = 10.0;
     public final double wheelCircumference = diameter * Math.PI;
@@ -34,6 +35,7 @@ public class Lift {
     }
 
     public void stop() {
+//        liftMotor.setZeroPowerBehavior(BRAKE);
         liftMotor.setPower(0);
     }
 

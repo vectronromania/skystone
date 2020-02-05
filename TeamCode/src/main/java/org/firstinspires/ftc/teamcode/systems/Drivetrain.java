@@ -160,5 +160,26 @@ public class Drivetrain {
 
             return;
         }
+
+        public void diagonal(double centimeters, double power) {
+            double ticks = centimeters * ticksPerCentimeter;
+
+            rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() - ticks));
+            rightBack.setTargetPosition((int) (rightBack.getCurrentPosition()));
+            leftBack.setTargetPosition((int) (leftBack.getCurrentPosition()));
+            leftFront.setTargetPosition((int) (leftFront.getCurrentPosition() + ticks));
+
+            runToPosition();
+
+            setIdenticalPowers(power);
+
+            while (motorsBusy()) {
+
+            }
+
+            stop();
+
+            return;
+        }
     }
 }

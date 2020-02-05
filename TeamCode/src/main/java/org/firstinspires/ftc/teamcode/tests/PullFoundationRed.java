@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Autonomous(name = "Pull foundation (red right)", group = "Tests")
-public class PullFoundation extends LinearOpMode {
+@Autonomous(name = "Pull foundation (red)", group = "Tests")
+public class PullFoundationRed extends LinearOpMode {
 
     public Robot robot = new Robot();
     public ElapsedTime runtime = new ElapsedTime();
@@ -25,12 +25,12 @@ public class PullFoundation extends LinearOpMode {
         robot.autodrivetrain.move(-80, 0.5);
         robot.foundation.down();
         sleep(3000);
-        robot.foundation.stop();
+//        robot.foundation.stop();
         robot.autodrivetrain.move(20, 0.5);
         robot.autodrivetrain.rotate(52, 0.5);
         robot.foundation.up();
         sleep(1000);
-        robot.foundation.stop();
+//        robot.foundation.stop();
         robot.autodrivetrain.move(115, 0.5);
 
         while (opModeIsActive()) {

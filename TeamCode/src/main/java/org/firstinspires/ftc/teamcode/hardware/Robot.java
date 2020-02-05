@@ -37,7 +37,7 @@ public class Robot {
         outtake.getHardwareMap(hardwareMap);
         outtake.setDirection();
 
-//        arm.getHardwareMap(hardwareMap);
-//        arm.setDirection();
+        arm.getHardwareMap(hardwareMap);
+        arm.setDirection();
     }
 }

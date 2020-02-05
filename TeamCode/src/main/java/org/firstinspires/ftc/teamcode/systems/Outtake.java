@@ -17,7 +17,7 @@ public class Outtake {
     }
 
     public void setDirection(){
-        outtakeServo.setDirection(Servo.Direction.FORWARD);
+//        outtakeServo.setDirection(Servo.Direction.FORWARD);
         outtakemotor.setDirection(DcMotor.Direction.FORWARD);
     }
 

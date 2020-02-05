@@ -33,6 +33,13 @@ public class EncoderTest extends LinearOpMode {
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    public void stopAndResetEncoders() {
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
     public boolean motorsBusy() {
         if (rightFront.isBusy() && rightBack.isBusy() && leftBack.isBusy() && leftFront.isBusy()) {
             return true;
@@ -57,6 +64,8 @@ public class EncoderTest extends LinearOpMode {
         runtime.reset();
 
         getHardwareMap(hardwareMap);
+
+        stopAndResetEncoders();
 
         rightFront.setTargetPosition((int) (rightFront.getCurrentPosition() - ticks));
         rightBack.setTargetPosition((int) (rightBack.getCurrentPosition() - ticks));
