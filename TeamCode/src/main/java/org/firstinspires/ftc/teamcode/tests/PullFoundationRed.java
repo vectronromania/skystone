@@ -22,16 +22,17 @@ public class PullFoundationRed extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        robot.autodrivetrain.move(-80, 0.5);
+        robot.autodrivetrain.strafe(-45, 1);
+        robot.autodrivetrain.move(-90, 0.5);
         robot.foundation.down();
-        sleep(3000);
-//        robot.foundation.stop();
-        robot.autodrivetrain.move(20, 0.5);
-        robot.autodrivetrain.rotate(52, 0.5);
+        sleep(1000);
+        robot.autodrivetrain.move(80, 0.5);
+        robot.autodrivetrain.rotate(110, 0.5);
         robot.foundation.up();
         sleep(1000);
-//        robot.foundation.stop();
-        robot.autodrivetrain.move(115, 0.5);
+        robot.autodrivetrain.move(-25, 0.5);
+        robot.autodrivetrain.strafe(-40, 1);
+        robot.autodrivetrain.move(100, 0.5);
 
         while (opModeIsActive()) {
 

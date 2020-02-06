@@ -1,16 +1,25 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Autonomous(name = "Movement", group = "Debug")
-public class Movement extends LinearOpMode {
+@Autonomous(name = "Detection", group = "Tests")
+public class Detection extends LinearOpMode {
+
+    public ColorSensor sensor;
 
     public Robot robot = new Robot();
     public ElapsedTime runtime = new ElapsedTime();
+
+    public void getHardwareMap() {
+        sensor = hardwareMap.get(ColorSensor.class, "color");
+    }
 
     @Override
     public void runOpMode() {
@@ -22,18 +31,11 @@ public class Movement extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-//        robot.autodrivetrain.move(80, 0.75);
-//        robot.autodrivetrain.move(-80, 0.75);
-//        robot.autodrivetrain.rotate(52, 0.75);
-//        robot.autodrivetrain.rotate(-52, 0.75);
-        robot.autodrivetrain.strafe(100, 1);
-        robot.autodrivetrain.strafe(-100, 1);
 
-        while (opModeIsActive()) {
+
+        while(opModeIsActive()) {
 
         }
 
-        telemetry.addData("Status", "Done");
-        telemetry.update();
     }
 }

@@ -2,12 +2,13 @@ package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Autonomous(name = "Movement", group = "Debug")
-public class Movement extends LinearOpMode {
+@TeleOp(name = "Show power", group = "TeleOpModes")
+public class ShowPower extends LinearOpMode {
 
     public Robot robot = new Robot();
     public ElapsedTime runtime = new ElapsedTime();
@@ -22,15 +23,9 @@ public class Movement extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-//        robot.autodrivetrain.move(80, 0.75);
-//        robot.autodrivetrain.move(-80, 0.75);
-//        robot.autodrivetrain.rotate(52, 0.75);
-//        robot.autodrivetrain.rotate(-52, 0.75);
-        robot.autodrivetrain.strafe(100, 1);
-        robot.autodrivetrain.strafe(-100, 1);
-
         while (opModeIsActive()) {
-
+            robot.drivetrain.drive(gamepad1);
+            robot.drivetrain.showPower(telemetry);
         }
 
         telemetry.addData("Status", "Done");

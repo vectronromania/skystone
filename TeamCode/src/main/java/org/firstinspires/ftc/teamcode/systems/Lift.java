@@ -34,10 +34,7 @@ public class Lift {
         liftMotor.setPower(0.5);
     }
 
-    public void stop() {
-//        liftMotor.setZeroPowerBehavior(BRAKE);
-        liftMotor.setPower(0);
-    }
+    public void stop() { liftMotor.setPower(0); }
 
     public void drive(Gamepad gamepad) {
         if (gamepad.left_stick_y < 0) {

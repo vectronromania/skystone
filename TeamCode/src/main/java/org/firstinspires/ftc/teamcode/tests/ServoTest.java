@@ -10,8 +10,8 @@ public class ServoTest extends LinearOpMode {
 
     private ElapsedTime runtime  = new ElapsedTime();
 
-//    Servo armServo;
-//    Servo catchServo;
+    Servo armServo;
+    Servo catchServo;
     Servo outtakeServo;
 
     @Override
@@ -19,15 +19,22 @@ public class ServoTest extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-//        armServo = hardwareMap.servo.get("armServo");
-//        catchServo = hardwareMap.servo.get("catchServo");
+        armServo = hardwareMap.servo.get("armServo");
+        catchServo = hardwareMap.servo.get("catchServo");
         outtakeServo = hardwareMap.servo.get("outtakeServo");
 
         waitForStart();
         runtime.reset();
 
-        outtakeServo.setPosition(0);
+      //  outtakeServo.setPosition(0);
+       // sleep(2000);
+       // outtakeServo.setPosition(1);
+
+        armServo.setPosition(0);
         sleep(2000);
-        outtakeServo.setPosition(1);
+        catchServo.setPosition(1);
+        sleep(2000);
+        armServo.setPosition(1);
+
     }
 }
