@@ -37,7 +37,9 @@ public class SensorColorRed extends LinearOpMode {
 
         robot.initialize(hardwareMap);
 
-        robot.autodrivetrain.strafe(-90,1);
+        robot.autodrivetrain.move(50,0.75);
+        robot.autodrivetrain.rotate(51, 0.75);
+        robot.autodrivetrain.strafe(-10, 0.5);
         sleep(1000);
 
         NormalizedRGBA rgba = colorSensor.getNormalizedColors();
@@ -48,19 +50,37 @@ public class SensorColorRed extends LinearOpMode {
             sleep(1000);
             robot.arm.take();
             sleep(1000);
-            robot.autodrivetrain.strafe(10, 0.75);
-            robot.autodrivetrain.move(50, 0.75);
+            robot.arm.up();
+            sleep(1000);
+            robot.autodrivetrain.strafe(15, 1);
+            robot.autodrivetrain.move(90, 0.75);
+            robot.arm.down();
+            sleep(1000);
+            robot.arm.release();
             sleep(1000);
             robot.arm.up();
-            robot.autodrivetrain.move(-90,0.75);
+            robot.arm.take();
+            robot.autodrivetrain.move(-200,0.75);
+            robot.autodrivetrain.strafe(-10, 1);
             if((double)(rgba.alpha / rgba.red) >= 3.0) {
                 telemetry.addData("Position", 4);
+                robot.arm.release();
+                sleep(1000);
                 robot.arm.down();
                 sleep(1000);
                 robot.arm.take();
                 sleep(1000);
-                robot.autodrivetrain.strafe(10, 0.75);
-                robot.autodrivetrain.move(90, 0.75);
+                robot.arm.up();
+                sleep(1000);
+                robot.autodrivetrain.strafe(10, 1);
+                robot.autodrivetrain.move(200, 0.75);
+                sleep(1000);
+                robot.arm.down();
+                sleep(1000);
+                robot.arm.release();
+                sleep(1000);
+                robot.arm.up();
+                robot.arm.take();
                 robot.autodrivetrain.move(-50, 0.75);
             } else {
                 robot.autodrivetrain.move(-20, 0.75);
@@ -72,24 +92,41 @@ public class SensorColorRed extends LinearOpMode {
 
             if ((double)(rgba.alpha / rgba.red) >= 3.0) {
                 telemetry.addData("Position", 2);
+                robot.arm.release();
+                sleep(1000);
                 robot.arm.down();
                 sleep(1000);
                 robot.arm.take();
                 sleep(1000);
-                robot.autodrivetrain.strafe(10, 0.75);
-                robot.autodrivetrain.move(30, 0.75);
+                robot.arm.up();
+                sleep(1000);
+                robot.autodrivetrain.strafe(10, 1);
+                robot.autodrivetrain.move(110, 0.75);
+                robot.arm.down();
+                sleep(1000);
+                robot.arm.release();
                 sleep(1000);
                 robot.arm.up();
-                robot.arm.up();
-                robot.autodrivetrain.move(-85,0.75);
+                robot.arm.take();
+                robot.autodrivetrain.move(-220,0.75);
+                robot.autodrivetrain.strafe(-10, 1);
                 if((double)(rgba.alpha / rgba.red) >= 3.0) {
                     telemetry.addData("Position", 5);
+                    robot.arm.release();
+                    sleep(1000);
                     robot.arm.down();
                     sleep(1000);
                     robot.arm.take();
+                    robot.arm.up();
                     sleep(1000);
-                    robot.autodrivetrain.strafe(10, 0.75);
-                    robot.autodrivetrain.move(90, 0.75);
+                    robot.autodrivetrain.strafe(10, 1);
+                    robot.autodrivetrain.move(220, 0.75);
+                    robot.arm.down();
+                    sleep(1000);
+                    robot.arm.release();
+                    sleep(1000);
+                    robot.arm.up();
+                    robot.arm.take();
                     robot.autodrivetrain.move(-50, 0.75);
                 } else {
                     robot.autodrivetrain.move(-20, 0.75);
@@ -104,19 +141,36 @@ public class SensorColorRed extends LinearOpMode {
                     robot.arm.down();
                     sleep(1000);
                     robot.arm.take();
-                    robot.autodrivetrain.strafe(10, 0.75);
-                    robot.autodrivetrain.move(50, 0.75);
                     sleep(1000);
-                    robot.arm.up();robot.arm.up();
-                    robot.autodrivetrain.move(-80,0.75);
+                    robot.arm.up();
+                    robot.autodrivetrain.strafe(10, 1);
+                    robot.autodrivetrain.move(120, 0.75);
+                    robot.arm.down();
+                    sleep(1000);
+                    robot.arm.release();
+                    sleep(1000);
+                    robot.arm.up();
+                    robot.arm.take();
+                    robot.autodrivetrain.move(-240,0.75);
+                    robot.autodrivetrain.strafe(- 10, 1);
                     if((double)(rgba.alpha / rgba.red) >= 3.0) {
                         telemetry.addData("Position", 6  );
+                        robot.arm.release();
+                        sleep(1000);
                         robot.arm.down();
                         sleep(1000);
                         robot.arm.take();
                         sleep(1000);
-                        robot.autodrivetrain.strafe(10, 0.75);
-                        robot.autodrivetrain.move(80, 0.75);
+                        robot.arm.up();
+                        sleep(1000);
+                        robot.autodrivetrain.strafe(10, 1);
+                        robot.autodrivetrain.move(240, 0.75);
+                        robot.arm.down();
+                        sleep(1000);
+                        robot.arm.release();
+                        sleep(1000);
+                        robot.arm.up();
+                        robot.arm.take();
                         robot.autodrivetrain.move(-50, 0.75);
                     } else {
                         telemetry.addData("Position", "NONE");

@@ -35,5 +35,6 @@ public class ServoTest extends LinearOpMode {
         catchServo.setPosition(1);
         sleep(2000);
         armServo.setPosition(1);
+
     }
 }

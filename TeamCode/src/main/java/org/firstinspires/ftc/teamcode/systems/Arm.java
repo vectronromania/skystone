@@ -11,7 +11,7 @@ public class Arm {
     public Servo catchServo;
 
     public void getHardwareMap(HardwareMap hardwareMap) {
-        armServo = hardwareMap.get(Servo.class, "armServo");
+        armServo = hardwareMap.get(Servo.class,  "armServo");
         catchServo = hardwareMap.get(Servo.class, "catchServo");
     }
 
